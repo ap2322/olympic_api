@@ -1,24 +1,29 @@
-# README
+# Olympics API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The primary purpose of this API is to return data and analysis from the 2016 Summer Olympic Games. The future of this API will be to integrate the historical data from 2016 with a 2020 Summer Olympics Tracker App.
 
-Things you may want to cover:
+# Contents
+- Deployment
+- Technologies Used
+- Installation and Local Deployment
+- Using the Olympics API
+- Rake Tasks
+  - import:all
+- Process
+- Challenges
+- Tradeoffs
+- Future Features
 
-* Ruby version
+# Rake Tasks
 
-* System dependencies
+To facilitate importing historical data, specifically from the 2016 Summer Games, look at the import rake tasks built within this api.
 
-* Configuration
+### `import:all`
 
-* Database creation
+This task calls in order the following tasks: `import:olympians`, `import:events`, and `import:olympian_events` found in `lib/tasks/import_2016_data.rake` to populate the database with data from the csv file `db/2016_summer_olympic_data.csv`
 
-* Database initialization
+```
+rake import:all
+```
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+To run in testing, use `rake import:all RAILS_ENV=test`
