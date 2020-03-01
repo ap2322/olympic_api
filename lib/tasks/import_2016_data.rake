@@ -7,11 +7,15 @@ namespace :import do
 
     CSV.foreach(file, {:headers => true, :header_converters => :symbol}) do |row|
       row_hash = row.to_h
+      country = Country.find_or_create_by(team: row_hash[:team])
+      sport = Sport.find_or_create_by(sport: row_hash[:sport])
       Olympian.create({ name: row_hash[:name],
                         sex: row_hash[:sex],
                         age: row_hash[:age],
                         height: row_hash[:height],
-                        weight: row_hash[:weight]
+                        weight: row_hash[:weight],
+                        country_id: country.id,
+                        sport_id: sport.id,
                       })
     end
   end
