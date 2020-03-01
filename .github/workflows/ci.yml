@@ -19,13 +19,10 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
-    - uses: actions/checkout@v1
-
-    - name: Set up Ruby 2.4.1
+    - uses: actions/checkout@v2
     - uses: actions/setup-ruby@v1
       with:
         ruby-version: 2.4.1
-    - run: ruby -v
 
     - name: Install PostgreSQL 11 client
       run: |
