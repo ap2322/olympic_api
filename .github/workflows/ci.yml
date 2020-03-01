@@ -46,7 +46,7 @@ jobs:
         PGUSER: postgres
         RAILS_ENV: test
       run: |
-        gem install bundler
+        sudo install gem bundler
         bundle install --jobs 4 --retry 3
         bin/rails db:setup
         bundle exec rake import:all RAILS_ENV=test
