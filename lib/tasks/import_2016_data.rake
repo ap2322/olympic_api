@@ -1,10 +1,10 @@
 require 'csv'
+require 'activerecord-import'
 
-desc "import 2016 Summer Olympic Data from file"
+desc "individual tasks for importing Summer Olympic Data from file"
 namespace :import do
   task :olympians => [:environment] do
     file = "db/2016_summer_olympic_data.csv"
-
     CSV.foreach(file, {:headers => true, :header_converters => :symbol}) do |row|
       row_hash = row.to_h
       country = Country.find_or_create_by(team: row_hash[:team])
@@ -34,17 +34,18 @@ namespace :import do
 
   task :olympian_events => [:environment] do
     file = "db/2016_summer_olympic_data.csv"
-
+    olympian_events_array = []
     CSV.foreach(file, {:headers => true, :header_converters => :symbol}) do |row|
       row_hash = row.to_h
       olympian = Olympian.find_by(name: row_hash[:name])
       event = Event.find_by(event: row_hash[:event])
 
-      OlympianEvent.create({  olympian_id: olympian.id,
+      olympian_events_array.push({  olympian_id: olympian.id,
                               event_id: event.id,
                               medal: row_hash[:medal]
                           })
     end
+    OlympianEvent.import(olympian_events_array)
   end
 
   task :sports => [:environment] do
