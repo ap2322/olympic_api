@@ -59,21 +59,6 @@ ActiveRecord::Schema.define(version: 2020_03_01_050923) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "tests", force: :cascade do |t|
-    t.string "name"
-    t.string "sport"
-    t.string "sex"
-    t.integer "age"
-    t.integer "height"
-    t.integer "weight"
-    t.string "team"
-    t.string "games"
-    t.string "event"
-    t.string "medal"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   add_foreign_key "events", "sports"
   add_foreign_key "olympian_events", "events"
   add_foreign_key "olympian_events", "olympians"
