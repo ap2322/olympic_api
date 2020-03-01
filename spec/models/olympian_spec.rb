@@ -6,4 +6,10 @@ RSpec.describe Olympian, type: :model do
     it { should validate_uniqueness_of(:name)}
 
   end
+
+  describe 'relationships' do
+    it {should belong_to :country}
+    it {should belong_to :sport}
+    it {should have_many :olympian_events}
+  end
 end

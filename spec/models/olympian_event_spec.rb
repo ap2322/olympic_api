@@ -1,5 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe OlympianEvent, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'relationships' do
+    it {should belong_to :olympian}
+    it {should belong_to :event}
+  end
+
+  describe 'validations' do
+    it { should define_enum_for(:medal) }
+  end
 end
