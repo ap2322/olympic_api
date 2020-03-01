@@ -20,6 +20,33 @@ namespace :import do
     end
   end
 
+  task :events => [:environment] do
+    file = "db/2016_summer_olympic_data.csv"
+
+    CSV.foreach(file, {:headers => true, :header_converters => :symbol}) do |row|
+      row_hash = row.to_h
+      sport = Sport.find_or_create_by(sport: row_hash[:sport])
+      Event.create({ event: row_hash[:event],
+                     sport_id: sport.id
+                  })
+    end
+  end
+
+  task :olympian_events => [:environment] do
+    file = "db/2016_summer_olympic_data.csv"
+
+    CSV.foreach(file, {:headers => true, :header_converters => :symbol}) do |row|
+      row_hash = row.to_h
+      olympian = Olympian.find_by(name: row_hash[:name])
+      event = Event.find_by(event: row_hash[:event])
+
+      OlympianEvent.create({  olympian_id: olympian.id,
+                              event_id: event.id,
+                              medal: row_hash[:medal]
+                          })
+    end
+  end
+
   task :sports => [:environment] do
     file = "db/2016_summer_olympic_data.csv"
 
@@ -36,11 +63,4 @@ namespace :import do
     end
   end
 
-  task :events => [:environment] do
-    file = "db/2016_summer_olympic_data.csv"
-
-    CSV.foreach(file, {:headers => true, :header_converters => :symbol}) do |row|
-      Event.create({event: row.to_h[:event]})
-    end
-  end
 end
