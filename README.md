@@ -12,14 +12,37 @@ The primary purpose of this API is to return data and analysis from the 2016 Sum
   - Get Olympian Statistics `GET api/v1/olympian_stats`
 - Rake Tasks
   - import:all
-- Process
-- Challenges
-- Tradeoffs
-- Future Features
 
-# Using the Olympics API
 
-### Get Olympians `GET api/v1/olympians`
+## Deployment
+
+
+## Technologies Used
+
+- Ruby v2.6.3
+- Rails v5.2.4.1
+- Postgres v11.5
+- Testing Suite: Rspec, Shoulda-Matchers
+- CI with GitHub Actions
+
+
+## Installation and Local Deployment
+
+- `git clone` this repo and migrate into the directory before running `bundle install`
+- Set up and seed the local development and test databases with the following commands:
+```
+rails db:{create,migrate}
+rails db:migrate RAILS_ENV=test
+rake import:all
+rake import:all RAILS_ENV=test
+```
+- Check tests are passing locally with `bundle exec rspec`
+- Deploy to localhost with `rails s`
+
+
+## Using the Olympics API
+
+#### Get Olympians `GET api/v1/olympians`
 
 This endpoint retrieves all the olympians in the database and returns the collection as json with an array of `olympians`. Attributes for each olympian include: `name`, `team`, `age`, `sport`, and `total_medals_won`
 
@@ -52,7 +75,7 @@ Content-Type: application/json
 }
 ```
 
-### Get Olympians with Parameters `GET api/v1/olympians?age=<search_term>`
+#### Get Olympians with Parameters `GET api/v1/olympians?age=<search_term>`
 
 The `olympians` endpoint accepts a parameter of `age`. Valid `search_term`s include:
 - `oldest`(returns the oldest olympian by age at competition)
@@ -80,7 +103,7 @@ Content-Type: application/json
 }
 ```
 
-### Get Olympian Statistics `GET api/v1/olympian_stats`
+#### Get Olympian Statistics `GET api/v1/olympian_stats`
 
 The olympian statistics endpoint retrieves aggregate data about all the olympians in the database.
 
@@ -104,11 +127,79 @@ Content-Type: application/json
 }
 ```
 
-# Rake Tasks
+#### Get Events `GET api/v1/events`
+
+This endpoint retrieves all the events in the database and returns the collection as json with an array of `events`. Attributes for each event includes: `sport` and `events` where `events` lists all the names of the events for that `sport`.
+
+Example request: `GET http://localhost:3000/api/v1/events`
+
+Example response:
+```
+HTTP 1.1 200 OK
+Content-Type: application/json
+
+{
+  "events":
+    [
+      {
+        "sport": "Archery",
+        "events": [
+          "Archery Men's Individual",
+          "Archery Men's Team",
+          "Archery Women's Individual",
+          "Archery Women's Team"
+        ]
+      },
+      {
+        "sport": "Badminton",
+        "events": [
+          "Badminton Men's Doubles",
+          "Badminton Men's Singles",
+          "Badminton Women's Doubles",
+          "Badminton Women's Singles",
+          "Badminton Mixed Doubles"
+        ]
+      },
+      {...}
+    ]
+}
+```
+
+#### Get Medalists `GET api/v1/events/:id/medalists`
+
+This endpoint retrieves the olympians who medaled in the specified event with `:id`. The json response returns the `event` name and an array of `medalists` with attributes of `name`, `team`, `age`, and `medal`.
+
+Not every event will have medalists listed in the current database. *Data is a sample set as of March 2020*
+
+Example request: `GET http://localhost:3000/api/v1/events/9/medalists`
+```
+HTTP 1.1 200 OK
+Content-Type: application/json
+
+{
+  "event": "Badminton Mixed Doubles",
+  "medalists": [
+      {
+        "name": "Tontowi Ahmad",
+        "team": "Indonesia-1",
+        "age": 29,
+        "medal": "Gold"
+      },
+      {
+        "name": "Chan Peng Soon",
+        "team": "Malaysia",
+        "age": 28,
+        "medal": "Silver"
+      }
+    ]
+}
+```
+
+## Rake Tasks
 
 To facilitate importing historical data, specifically from the 2016 Summer Games, look at the import rake tasks built within this api.
 
-### `import:all`
+#### `import:all`
 
 This task calls in order the following tasks: `import:olympians`, `import:events`, and `import:olympian_events` found in `lib/tasks/import_2016_data.rake` to populate the database with data from the csv file `db/2016_summer_olympic_data.csv`
 
