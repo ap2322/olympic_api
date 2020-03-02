@@ -30,7 +30,7 @@ This api and sample data from the 2016 Summer Olympic Games is available at `htt
 - Rails v5.2.4.1
 - Postgres v11.5
 - Testing Suite: Rspec, Shoulda-Matchers
-- CI with GitHub Actions
+- CI with GitHub Actions ![](https://github.com/ap2322/olympic_api/workflows/Rails%20Tests/badge.svg)
 
 
 ## Installation and Local Deployment
