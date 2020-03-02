@@ -11,6 +11,9 @@ The primary purpose of this API is to return data and analysis from the 2016 Sum
   - Get Olympians `GET api/v1/olympians`
   - Get Olympians with Parameters
   - Get Olympian Statistics `GET api/v1/olympian_stats`
+  - Get Events `GET api/v1/events`
+  - Get Medalists `GET api/v1/events/:id/medalists`
+  - Get Teams `GET api/v1/teams`
 - [Rake Tasks](#rake-tasks)
   - import:all
 
@@ -201,6 +204,57 @@ Content-Type: application/json
         "medal": "Silver"
       }
     ]
+}
+```
+
+#### Get Teams `GET api/v1/teams`
+
+This endpoint returns all the teams with their name and their country's olympian statistics.
+
+Example request: `GET https://ap-olympic-api.herokuapp.com/api/v1/teams`
+
+Example response:
+```
+{
+    "teams": [
+        {
+            "team": "Afghanistan",
+            "olympian_stats": {
+                "total_competing_olympians": 1,
+                "average_weight": {
+                    "unit": "kg",
+                    "male_olympians": 99.0,
+                    "female_olympians": null
+                },
+                "average_age": 30
+            }
+        },
+        {
+            "team": "Albania",
+            "olympian_stats": {
+                "total_competing_olympians": 1,
+                "average_weight": {
+                    "unit": "kg",
+                    "male_olympians": 69.0,
+                    "female_olympians": null
+                },
+                "average_age": 26
+            }
+        },
+        {
+            "team": "Algeria",
+            "olympian_stats": {
+                "total_competing_olympians": 37,
+                "average_weight": {
+                    "unit": "kg",
+                    "male_olympians": 74.1,
+                    "female_olympians": 60.1
+                },
+                "average_age": 25
+            }
+        },
+        {...}
+      ]
 }
 ```
 
