@@ -12,4 +12,14 @@ RSpec.describe Olympian, type: :model do
     it {should belong_to :sport}
     it {should have_many :olympian_events}
   end
+
+  describe 'class methods' do
+    it 'finds the youngest olympian' do
+      youngest_in_array = Olympian.find_youngest
+
+      expect(youngest_in_array.length).to eq 1
+      expect(youngest_in_array.first.name).to eq "Ana Iulia Dascl"
+      expect(youngest_in_array.first.age).to eq 13
+    end
+  end
 end
