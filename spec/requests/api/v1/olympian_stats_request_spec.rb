@@ -15,5 +15,15 @@ RSpec.describe 'Olympians Stats API', :type => :request do
       expect(parsed_response[:olympian_stats][:average_weight]).to have_key :female_olympians
       expect(parsed_response[:olympian_stats]).to have_key :average_age
     end
+
+    it 'renders error message if no Olympians in db' do
+      allow(Olympian).to receive(:all) { [] }
+      get '/api/v1/olympian_stats'
+      expect(response.status).to eq 404
+      parsed_response = JSON.parse(response.body, symbolize_names: true)
+
+      expect(parsed_response).to have_key :error
+
+    end
   end
 end
