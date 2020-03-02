@@ -10,4 +10,8 @@ class Olympian < ApplicationRecord
   def self.find_youngest
     [ select("*, MIN(age)").group(:id).order(:age).first ]
   end
+
+  def self.find_oldest
+    [ select("*, MAX(age)").group(:id).order(age: :desc).first ]
+  end
 end
