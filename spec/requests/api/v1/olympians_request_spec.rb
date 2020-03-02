@@ -16,27 +16,6 @@ RSpec.describe 'Olympians API', :type => :request do
       expect(parsed_response[:olympians][0]).to have_key :total_medals_won
 
       expect(parsed_response[:olympians].length).to be > 1
-
-      # {
-      #   "olympians":
-      #     [
-      #       {
-      #         "name": "Maha Abdalsalam",
-      #         "team": "Egypt",
-      #         "age": 18,
-      #         "sport": "Diving"
-      #         "total_medals_won": 0
-      #       },
-      #       {
-      #         "name": "Ahmad Abughaush",
-      #         "team": "Jordan",
-      #         "age": 20,
-      #         "sport": "Taekwondo"
-      #         "total_medals_won": 1
-      #       },
-      #       {...}
-      #     ]
-      # }
     end
   end
 end
