@@ -3,12 +3,7 @@ class EventSerializer
 
   def initialize(sport)
     @sport = sport.sport
-    @events = events_of_sport(sport)
+    @events = sport.events_of_sport
   end
-
-  def events_of_sport(sport)
-    sport.events.pluck(:event)
-  end
-
 
 end
