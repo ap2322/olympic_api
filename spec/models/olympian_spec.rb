@@ -21,5 +21,13 @@ RSpec.describe Olympian, type: :model do
       expect(youngest_in_array.first.name).to eq "Ana Iulia Dascl"
       expect(youngest_in_array.first.age).to eq 13
     end
+
+    it 'finds the oldest olympian' do
+      youngest_in_array = Olympian.find_oldest
+
+      expect(youngest_in_array.length).to eq 1
+      expect(youngest_in_array.first.name).to eq "Julie Brougham"
+      expect(youngest_in_array.first.age).to eq 62
+    end
   end
 end
