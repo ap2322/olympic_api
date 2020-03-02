@@ -14,4 +14,20 @@ class Olympian < ApplicationRecord
   def self.find_oldest
     [ select("*, MAX(age)").group(:id).order(age: :desc).first ]
   end
+
+  def self.total_competing_olympians
+    count
+  end
+
+  def self.average_age
+    average(:age).round(0).to_i
+  end
+
+  def self.average_weight_male
+    where(sex: "M").average(:weight).round(1).to_f
+  end
+
+  def self.average_weight_female
+    where(sex: "F").average(:weight).round(1).to_f
+  end
 end
