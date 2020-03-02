@@ -16,7 +16,7 @@ RSpec.describe 'Teams API', :type => :request do
 
     it 'returns an empty array for no teams in db' do
 
-      allow(Country).to receive_message_chain(:includes, :all) { [] }
+      allow(Country).to receive_message_chain(:includes, :order, :all) { [] }
 
       get '/api/v1/teams'
       expect(response).to be_successful
