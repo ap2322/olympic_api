@@ -29,5 +29,18 @@ RSpec.describe Olympian, type: :model do
       expect(youngest_in_array.first.name).to eq "Julie Brougham"
       expect(youngest_in_array.first.age).to eq 62
     end
+
+    it 'counts the olympians' do
+      expect(Olympian.total_competing_olympians).to eq 2850
+    end
+
+    it 'finds the average age of all olympians' do
+      expect(Olympian.average_age).to eq 26
+    end
+
+    it 'finds the average weight by gender' do
+      expect(Olympian.average_weight_male).to eq 77.9
+      expect(Olympian.average_weight_female).to eq 61.4
+    end
   end
 end
