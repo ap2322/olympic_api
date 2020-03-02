@@ -3,18 +3,20 @@
 The primary purpose of this API is to return data and analysis from the 2016 Summer Olympic Games. The future of this API will be to integrate the historical data from 2016 with a 2020 Summer Olympics Tracker App.
 
 # Contents
-- Deployment
-- Technologies Used
-- Installation and Local Deployment
-- Using the Olympics API
+- [Deployment](#deployment)
+- [Technologies Used](#technologies-used)
+- [Installation and Local Deployment](#installation-and-local-deployment)
+- [Using the Olympics API](#using-the-olympics-api)
   - Get Olympians `GET api/v1/olympians`
   - Get Olympians with Parameters
   - Get Olympian Statistics `GET api/v1/olympian_stats`
-- Rake Tasks
+- [Rake Tasks](#rake-tasks)
   - import:all
 
 
 ## Deployment
+
+This api and sample data from the 2016 Summer Olympic Games is available at `https://ap-olympic-api.herokuapp.com/`.
 
 
 ## Technologies Used
@@ -42,11 +44,13 @@ rake import:all RAILS_ENV=test
 
 ## Using the Olympics API
 
+All of these endpoints are hosted at `https://ap-olympic-api.herokuapp.com/`. Prepend this url to the endpoints below to query in production. If running locally, use `http://localhost:3000/`.
+
 #### Get Olympians `GET api/v1/olympians`
 
 This endpoint retrieves all the olympians in the database and returns the collection as json with an array of `olympians`. Attributes for each olympian include: `name`, `team`, `age`, `sport`, and `total_medals_won`
 
-Example request: `GET http://localhost:3000/api/v1/olympians`
+Example request: `GET https://ap-olympic-api.herokuapp.com/api/v1/olympians`
 
 Example response:
 ```
@@ -81,7 +85,7 @@ The `olympians` endpoint accepts a parameter of `age`. Valid `search_term`s incl
 - `oldest`(returns the oldest olympian by age at competition)
 - `youngest` (returns the youngest olympian by age at competition)
 
-Example request: `GET http://localhost:3000/api/v1/olympians?age=youngest`
+Example request: `GET https://ap-olympic-api.herokuapp.com/api/v1/olympians?age=youngest`
 
 Example response:
 ```
@@ -107,7 +111,7 @@ Content-Type: application/json
 
 The olympian statistics endpoint retrieves aggregate data about all the olympians in the database.
 
-Example request: `GET http://localhost:3000/api/v1/olympian_stats`
+Example request: `GET https://ap-olympic-api.herokuapp.com/api/v1/olympian_stats`
 
 Example response:
 ```
@@ -131,7 +135,7 @@ Content-Type: application/json
 
 This endpoint retrieves all the events in the database and returns the collection as json with an array of `events`. Attributes for each event includes: `sport` and `events` where `events` lists all the names of the events for that `sport`.
 
-Example request: `GET http://localhost:3000/api/v1/events`
+Example request: `GET https://ap-olympic-api.herokuapp.com/api/v1/events`
 
 Example response:
 ```
@@ -171,7 +175,7 @@ This endpoint retrieves the olympians who medaled in the specified event with `:
 
 Not every event will have medalists listed in the current database. *Data is a sample set as of March 2020*
 
-Example request: `GET http://localhost:3000/api/v1/events/9/medalists`
+Example request: `GET https://ap-olympic-api.herokuapp.com/api/v1/events/9/medalists`
 ```
 HTTP 1.1 200 OK
 Content-Type: application/json
