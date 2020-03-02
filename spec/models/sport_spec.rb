@@ -10,4 +10,12 @@ RSpec.describe Sport, type: :model do
     it {should have_many :events}
     it {should have_many :olympians}
   end
+
+  describe 'instance methods' do
+    it 'retrieves an array of names of all its events' do
+      sport = Sport.order(:sport).first
+      expected =  ["Archery Women's Individual", "Archery Women's Team", "Archery Men's Individual", "Archery Men's Team"]
+      expect(sport.events_of_sport).to eq expected
+    end
+  end
 end
