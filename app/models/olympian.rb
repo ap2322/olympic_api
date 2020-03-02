@@ -30,4 +30,8 @@ class Olympian < ApplicationRecord
   def self.average_weight_female
     where(sex: "F").average(:weight).round(1).to_f
   end
+
+  def event_medal
+    olympian_events.pluck(:medal).first
+  end
 end
