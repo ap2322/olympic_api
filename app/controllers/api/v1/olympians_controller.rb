@@ -4,9 +4,7 @@ class Api::V1::OlympiansController < ApplicationController
     olympians = fetch_olympians(params[:age])
 
     if olympians.count > 0
-      olympians_serialized = OlympianSerializer.new(olympians)
-      olympians_as_hash = ReformatOlympians.new(olympians_serialized.serializable_hash)
-
+      olympians_as_hash = { olympians: OlympianAggregator.build(olympians) }
       render json: olympians_as_hash, status: 200
     else
       response_hash = { olympians: []}
@@ -18,7 +16,7 @@ class Api::V1::OlympiansController < ApplicationController
   def fetch_olympians(age_param)
     case age_param
     when nil
-      Olympian.all
+      Olympian.includes(:olympian_events).all
     when 'youngest'
       Olympian.find_youngest
     when 'oldest'

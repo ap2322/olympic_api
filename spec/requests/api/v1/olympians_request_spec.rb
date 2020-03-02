@@ -19,8 +19,8 @@ RSpec.describe 'Olympians API', :type => :request do
     end
 
     it 'returns an empty array for no olympians in db' do
-
-      allow(Olympian).to receive(:all) { [] }
+      allow(Olympian).to receive_message_chain(:includes, :all) { [] }
+      
       get '/api/v1/olympians'
       expect(response).to be_successful
       parsed_response = JSON.parse(response.body, symbolize_names: true)

@@ -52,5 +52,13 @@ RSpec.describe Olympian, type: :model do
       no_medal_guy = Olympian.find_by(name: "Andreea Aanei")
       expect(no_medal_guy.event_medal).to eq "NA"
     end
+
+    it 'returns the count of medals won' do
+      medaled_olympian = Olympian.find_by(name: "Luc Abalo")
+      expect(medaled_olympian.medals_won).to eq 1
+
+      non_medaled_olympian = Olympian.find_by(name: "Andreea Aanei")
+      expect(non_medaled_olympian.medals_won).to eq 0
+    end
   end
 end

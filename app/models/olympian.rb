@@ -6,6 +6,9 @@ class Olympian < ApplicationRecord
   belongs_to :country
   belongs_to :sport
 
+  def medals_won
+    olympian_events.where(medal: [1, 2, 3]).count
+  end
 
   def self.find_youngest
     [ select("*, MIN(age)").group(:id).order(:age).first ]
