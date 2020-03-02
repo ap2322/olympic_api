@@ -13,5 +13,19 @@ RSpec.describe 'Events API', :type => :request do
       expect(parsed_response[:events][0]).to have_key :events
 
     end
+
+    it 'returns an empty array for no events in db' do
+
+      allow(Sport).to receive_message_chain(:includes, :order, :all) { [] }
+
+      get '/api/v1/events'
+      expect(response).to be_successful
+      parsed_response = JSON.parse(response.body, symbolize_names: true)
+
+      expect(parsed_response).to have_key :events
+      expect(parsed_response[:events].length).to eq 0
+
+    end
+
   end
 end
