@@ -3,6 +3,7 @@
 The primary purpose of this API is to return data and analysis from the 2016 Summer Olympic Games. The future of this API will be to integrate the historical data from 2016 with a 2020 Summer Olympics Tracker App.
 
 # Contents
+- [Schema](#schema)
 - [Deployment](#deployment)
 - [Technologies Used](#technologies-used)
 - [Installation and Local Deployment](#installation-and-local-deployment)
@@ -13,6 +14,10 @@ The primary purpose of this API is to return data and analysis from the 2016 Sum
 - [Rake Tasks](#rake-tasks)
   - import:all
 
+
+## Schema
+
+<img width="750" alt="schema diagram" src="https://user-images.githubusercontent.com/26877629/75621273-47996280-5b4f-11ea-8c63-0b0e48c242fd.png">
 
 ## Deployment
 
