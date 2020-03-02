@@ -1,7 +1,12 @@
 class Api::V1::OlympiansController < ApplicationController
 
   def index
-    olympians = Olympian.all
+    if params[:age].nil?
+      olympians = Olympian.all
+    elsif params[:age] = 'youngest'
+      olympians = Olympian.find_youngest
+    end
+
     if olympians.count > 0
       olympians_serialized = OlympianSerializer.new(olympians)
       olympians_as_hash = ReformatOlympians.new(olympians_serialized.serializable_hash)
