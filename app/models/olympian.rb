@@ -23,15 +23,24 @@ class Olympian < ApplicationRecord
   end
 
   def self.average_age
-    average(:age).round(0).to_i
+    avg_age = average(:age)
+    unless avg_age.nil?
+      avg_age.round(0).to_i
+    end
   end
 
   def self.average_weight_male
-    where(sex: "M").average(:weight).round(1).to_f
+    avg_weight = where(sex: "M").average(:weight)
+    unless avg_weight.nil?
+      avg_weight.round(1).to_f
+    end
   end
 
   def self.average_weight_female
-    where(sex: "F").average(:weight).round(1).to_f
+    avg_weight = where(sex: "F").average(:weight)
+    unless avg_weight.nil?
+      avg_weight.round(1).to_f
+    end
   end
 
   def event_medal
