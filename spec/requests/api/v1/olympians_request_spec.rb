@@ -7,7 +7,7 @@ RSpec.describe 'Olympians API', :type => :request do
 
       expect(response).to be_successful
       parsed_response = JSON.parse(response.body, symbolize_names: true)
-      binding.pry
+      # binding.pry
       expect(parsed_response).to have_key :olympians
       expect(parsed_response[:olympians][0]).to have_key :name
       expect(parsed_response[:olympians][0]).to have_key :team
