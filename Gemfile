@@ -13,7 +13,7 @@ gem 'puma', '~> 3.11'
 gem 'json'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
-gem 'jsonapi-rails'
+# gem 'jsonapi-rails'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
@@ -28,7 +28,7 @@ gem 'jsonapi-rails'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
-# gem 'fast_jsonapi'
+gem 'fast_jsonapi'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 gem 'activerecord-import'
