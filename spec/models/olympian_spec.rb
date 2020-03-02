@@ -43,4 +43,14 @@ RSpec.describe Olympian, type: :model do
       expect(Olympian.average_weight_female).to eq 61.4
     end
   end
+
+  describe 'instance methods' do
+    it 'returns the medal name for an olympian' do
+      tony = Olympian.find_by(name: "Tontowi Ahmad")
+      expect(tony.event_medal).to eq "Gold"
+
+      no_medal_guy = Olympian.find_by(name: "Andreea Aanei")
+      expect(no_medal_guy.event_medal).to eq "NA"
+    end
+  end
 end
